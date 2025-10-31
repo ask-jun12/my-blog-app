@@ -25,11 +25,9 @@ const PostCard = ({ post }: PostCardProps) => {
           <CardTitle className="line-clamp-2">{post.title}</CardTitle>
         </CardHeader>
         <CardContent className="pb-4">
-          <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-            {post.content}
-          </p>
           <div className="flex items-center justify-between text-sm text-gray-500">
             <span>{post.author.name}</span>
+            <span>{post.tags}</span>
             <time>
               {formatDistanceToNow(new Date(post.createdAt), {
                 addSuffix: true,
