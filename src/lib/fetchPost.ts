@@ -22,6 +22,7 @@ const headers = {
  * 単一記事フォルダからMarkdownとtopImageを抽出
  */
 const fetchPostFromDir = async (dirPath: string): Promise<Post | null> => {
+  console.log(`Fetching post from directory: ${dirPath}`);
   // Markdownファイルを検索
   const listUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${dirPath}?ref=${BRANCH}`;
   const res = await fetch(listUrl, { headers });
@@ -40,6 +41,9 @@ const fetchPostFromDir = async (dirPath: string): Promise<Post | null> => {
 
   const { data: frontmatter, content } = matter(mdText);
 
+  const articleId = filesDir?.path.split("/")[1];
+  if (!articleId) return null;
+
   // topImage推定
   const topImageUrl = filesDir?.path
     ? `/${filesDir.path}/${process.env.TOP_IMAGE_NAME ?? "topImage.png"}`
@@ -49,7 +53,7 @@ const fetchPostFromDir = async (dirPath: string): Promise<Post | null> => {
   const createdAt = new Date(frontmatter.created);
 
   return {
-    id: crypto.randomUUID(),
+    id: articleId,
     title,
     content,
     topImage: topImageUrl,
@@ -57,6 +61,7 @@ const fetchPostFromDir = async (dirPath: string): Promise<Post | null> => {
     author: {
       name: frontmatter.author?.name ?? process.env.AUTHOR_NAME ?? "Unknown",
     },
+    tags: frontmatter.tags ?? ["タグなし"],
   };
 };
 
@@ -81,4 +86,4 @@ const fetchAllPosts = async (): Promise<Post[]> => {
   return posts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 };
 
-export default fetchAllPosts;
+export { fetchAllPosts, fetchPostFromDir };

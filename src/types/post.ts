@@ -7,6 +7,7 @@ type Post = {
   author: {
     name: string;
   };
+  tags: string[];
 };
 
 type PostCardProps = { post: Post };
