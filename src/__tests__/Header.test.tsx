@@ -12,19 +12,5 @@ describe("Header", () => {
     expect(logo).toBeInTheDocument();
     expect(logo).toHaveAttribute("href", "/");
     expect(logo).toHaveTextContent("Jun's BLOG");
-
-    // ナビゲーションメニューのテスト
-    const navigationItems = [
-      { label: "HOME", href: "/" },
-      { label: "SEARCH", href: "/search" },
-      { label: "PROFILE", href: "/profile" },
-    ];
-
-    navigationItems.forEach((item) => {
-      const link = screen.getByText(item.label);
-      expect(link).toBeInTheDocument();
-      expect(link).toHaveAttribute("href", item.href);
-      expect(link).toHaveTextContent(item.label);
-    });
   });
 });

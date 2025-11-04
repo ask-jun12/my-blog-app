@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Title from "@/components/Title";
 import { Separator } from "@/components/ui/separator";
 
@@ -9,7 +8,6 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Header />
       <div className="container mx-auto px-4 py-8">
         <Title />
       </div>
