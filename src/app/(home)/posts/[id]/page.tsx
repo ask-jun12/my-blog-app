@@ -24,7 +24,7 @@ const PostPage = async ({ params }: Params) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Card className="max-w-5xl mx-auto">
+      <Card className="max-w-5xl mx-auto pt-0">
         {post.topImage && (
           <div className="relative w-full h-96 lg:h-96">
             <Image
@@ -47,7 +47,6 @@ const PostPage = async ({ params }: Params) => {
               })}
             </time>
           </div>
-          {/* <CardTitle className="text-3xl font-bold">{post.title}</CardTitle> */}
         </CardHeader>
         <CardContent>
           <div className="prose max-w-none">
